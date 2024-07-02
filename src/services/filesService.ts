@@ -9,7 +9,7 @@ interface ApiResponse {
 }
 
 const cache: { data: any; timestamp: number } = { data: null, timestamp: 0 };
-const CACHE_DURATION = 60 * 1000; // 1 minute
+const CACHE_DURATION = 60 * 1000;
 
 const fetchAndTransformData = async (): Promise<any> => {
   const now = Date.now();
@@ -24,7 +24,6 @@ const fetchAndTransformData = async (): Promise<any> => {
     );
     const data: ApiResponse = response.data;
 
-    // Ensure data.items is an array
     if (!Array.isArray(data.items)) {
       throw new Error("API response items is not an array");
     }
@@ -49,7 +48,6 @@ const fetchAndTransformData = async (): Promise<any> => {
 
         if (!found) {
           if (index === paths.length - 1) {
-            // If it's the last path part, it's a file
             currentLevel.push(path);
           } else {
             found = { [path]: [] };
